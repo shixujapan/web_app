@@ -3,7 +3,8 @@
         <table class="basic-table">
             <thead>
                 <tr>
-                    <th>1</th>
+                    <th v-for="item in itemList" :key="item.id">{{item.id}}</th>
+                    <!-- <th>1</th>
                     <th>2</th>
                     <th>3</th>
                     <th>4</th>
@@ -12,7 +13,7 @@
                     <th>7</th>
                     <th>8</th>
                     <th>9</th>
-                    <th>10</th>
+                    <th>10</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,25 @@
 </template>
 
 <script>
+    export default{
+        data(){
+            return {
+                itemList: [],
+            }
+        },
+        methods:{
+            changePosition(itemList){
+                console.log(itemList);
+                this.itemList = itemList;
+            }
+        },
+        created(){
+            this.$eventHub.$on('change-position', this.changePosition);
+        },
+        beforeDestroy(){
+            this.$eventHub.$off('change-position');
+        },
+    }
 </script>
 
 <style lang="css" scoped>

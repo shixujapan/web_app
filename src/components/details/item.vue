@@ -48,7 +48,7 @@
         },
         methods:{
             end(){
-                console.log(this.itemList)
+                this.$eventHub.$emit('change-position', this.itemList);
             }
         },
         // data(){
